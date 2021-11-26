@@ -1,17 +1,14 @@
-const stockName = document.querySelector('#stockName');
-const costPrice = document.querySelector('#costPrice');
-const pnlBtn = document.querySelector('#profitLossBtn');
+const callApiBtn = document.querySelector('#callApiBtn');
 const output = document.querySelector('#output');
 
 // const url = ('https://stock-api.desaihetav.repl.co/current-price/');
 
 const secondUrl = ('https://stock-api.desaihetav.repl.co/list')
 
-pnlBtn.addEventListener("click" , apiCall)
+callApiBtn.addEventListener("click" , apiCall)
 
 function apiCall(){
 
-    // let newUrl = url + stockName.value;
     fetch(secondUrl)
     .then (res => res.json())
 
@@ -19,15 +16,20 @@ function apiCall(){
         
         {
             result.data.map(stocks  => {
-                output.innerHTML += `<li style="color:orange">id:${stocks.id} name:${stocks.name}</li>`
+                output.innerHTML += `<div><li style="color:orange">
+                id: <p style="color:black">${stocks.id}</p>
+                name: <p style="color:black">${stocks.name}</p> 
+                </li>
+                </div>`
+                
             })
         
 
     }
     )
-    .catch(error){
+    .catch((error) => {
         output.innerText = error
-    }
+    })
 }
 
 
